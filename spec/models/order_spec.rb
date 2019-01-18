@@ -8,4 +8,13 @@ RSpec.describe Order, type: :model do
 
     expect(order.status).to eq('open')
   end
+
+  it 'open orders that have an amount should become pending' do
+    order = Order.create
+    order.amount = 100.0
+
+    order.save
+
+    expect(order.status).to eq('pending')
+  end
 end
