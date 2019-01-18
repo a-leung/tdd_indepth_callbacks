@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'new orders are created with :open status' do
+    order = Order.new
+
+    order.save
+
+    expect(order.status).to eq('open')
+  end
 end
