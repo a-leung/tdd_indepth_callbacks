@@ -35,4 +35,14 @@ RSpec.describe Order, type: :model do
 
     expect(order.status).to eq('received')
   end
+
+  it 'any orders with save failures are marked :failed' do
+    order = Order.create
+    allow_any_instance_of(Order).to receive(:create_or_update).and_return(false)
+    order.amount = 100.00
+
+    order.save
+
+    expect(order.reload.status).to eq('failed')
+  end
 end
