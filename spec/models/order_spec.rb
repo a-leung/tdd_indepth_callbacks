@@ -17,4 +17,13 @@ RSpec.describe Order, type: :model do
 
     expect(order.status).to eq('pending')
   end
+
+  it 'existing orders have received == amount, its status is :received' do
+    order = Order.create(:amount => 100)
+    order.received = 100
+
+    order.save
+
+    expect(order.status).to eq('received')
+  end
 end
