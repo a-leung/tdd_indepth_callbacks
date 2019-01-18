@@ -26,4 +26,13 @@ RSpec.describe Order, type: :model do
 
     expect(order.status).to eq('received')
   end
+
+  it 'also handles potential irrational numbers' do
+    order = Order.create(:amount => 0.33)
+    order.received = 0.33
+
+    order.save
+
+    expect(order.status).to eq('received')
+  end
 end
