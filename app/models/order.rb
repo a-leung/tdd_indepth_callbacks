@@ -5,6 +5,6 @@ class Order < ApplicationRecord
 
   def modify_status
     self.status = 'open'
-    self.status = 'pending' if amount && amount > 0
+    self.status = 'pending' if attribute_changed?(:amount)
   end
 end
