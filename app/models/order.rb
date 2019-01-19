@@ -11,6 +11,12 @@ class Order < ApplicationRecord
   end
 
   def mark_failure
+    ActionMailer::Base.mail(from: 'from@domain.com',
+                            to: 'to@domain.com',
+                            subject: 'System Error',
+                            body: "Error with Save: \n Details: #{details}."
+                           ).deliver
+
     self.update_column(:status, 'failed')
   end
 end
